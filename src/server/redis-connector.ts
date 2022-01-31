@@ -26,8 +26,8 @@ class RedisConnector {
 		}
 
 		const parsedHistory = JSON.parse(tokenHistory);
-
-		if (parsedHistory.length >= 30) {
+		// store only 30 minutes worth of data 
+		if (parsedHistory.length >= 60) {
 			parsedHistory.shift();
 			parsedHistory.push(value);
 			await client.set(tokenName, JSON.stringify(parsedHistory));
