@@ -10,10 +10,10 @@ app.use(express.static(`public`, { maxAge: 604800e3 }));
 
 app.get('/api/rates', async (req, res) => {
 	try {
-		 const cDai = await redisConnector.getTokenRateHistory('cDAI')
+		 const cDAI = await redisConnector.getTokenRateHistory('cDAI')
 		 const aaveDAI = await redisConnector.getTokenRateHistory('aaveDAI')
 		 
-		res.send({cDai, aaveDAI})
+		res.send({cDAI, aaveDAI})
 	} catch (err) {
 		console.log(err);
 	}
