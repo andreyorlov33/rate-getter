@@ -55,11 +55,12 @@ const App: FC = () => {
 			setCount(() => new Date().toLocaleTimeString());
 			axios.get('http://localhost:3001/api/rates').then((response) => {
 				const { cDAI, aaveDAI } = response.data;
+			
 				if (cDAI) {
-					setcDaiData(cDAI);
+					setcDaiData(cDAI.map(token => Number(token.borrow_supply_rate)));
 				}
 				if (aaveDAI) {
-					setAaveData(aaveDAI);
+					setAaveData(aaveDAI.map(token => Number(token.borrow_supply_rate)));
 				}
 			});
 		}, 1000);

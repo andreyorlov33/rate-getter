@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { dataService } from './data-service';
-import { redisConnector } from './redis-connector';
+import { postgresConnector } from './postgres-connector';
 require('./lib/db'); // using require prevents webpack from tree-shaking it out
 
 const app = express();
@@ -10,9 +10,9 @@ app.use(express.static(`public`, { maxAge: 604800e3 }));
 
 app.get('/api/rates', async (req, res) => {
 	try {
-		 const cDAI = await redisConnector.getTokenRateHistory('cDAI')
-		 const aaveDAI = await redisConnector.getTokenRateHistory('aaveDAI')
-		 
+		const  cDAI = await postgresConnector.getRateData('cDAI')
+		const aaveDAI = await postgresConnector.getRateData('aaveDAI')
+
 		res.send({cDAI, aaveDAI})
 	} catch (err) {
 		console.log(err);
@@ -35,7 +35,7 @@ app.get('*', async (req: Request, res: Response) => {
           <title>Andrey's DAI Rate Getter</title>
         </head>
         <body>
-          <div id="app">FOOOO</div>
+          <div id="app">⛓⛓⛓⛓⛓</div>
           <script src="/bundles/main.bundle.js"></script>
         </body>
       </html>
@@ -46,8 +46,11 @@ app.get('*', async (req: Request, res: Response) => {
 	}
 });
 
+
+
 dataService.startFetchingLoop();
 
 app.listen(3000, '0.0.0.0', async () => {
+	await postgresConnector.runMigration();
 	console.log('App is running');
 });
