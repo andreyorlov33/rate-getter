@@ -45,7 +45,7 @@ class RedisConnector {
 			console.log(`${tokenName} history is empty`);
 			return [];
 		}
-		return history;
+		return JSON.parse(history).map(stringNumberValue => Number(stringNumberValue).toFixed(10))
 	}
 }
 

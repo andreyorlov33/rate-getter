@@ -38,14 +38,16 @@ class BlockChainRateGetter {
 			) -
 				1) *
 			100;
-		return borrowApy.toFixed(5);
+
+		return borrowApy.toFixed(10);
 	}
 
 	private async getAaveRate() {
 		const cToken = new this.web3Client.eth.Contract(aaveAbi, this.aaveAddress);
 		const rate = await cToken.methods.getAverageStableRate().call();
+
 		// weird javascript scientific notation thing 😵‍💫
-		return Number((rate / (10 ^ 18)).toString().slice(0, 4)).toPrecision(6);
+		return Number((rate / (10 ^ 18)).toString().slice(0, 10)).toPrecision(10);
 	}
 }
 
