@@ -117,7 +117,7 @@ const ROOT = path.resolve(__dirname);
    },
 
    plugins: [
-     new webpack.IgnorePlugin(/^fs$/),
+     //new webpack.IgnorePlugin(/^fs$/),
      new webpack.ProvidePlugin({
        Buffer: ['buffer', 'Buffer'],
        process: 'process/browser'

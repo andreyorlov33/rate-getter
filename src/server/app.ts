@@ -32,7 +32,7 @@ app.get('*', async (req: Request, res: Response) => {
 		const html = `
       <html>
         <head>
-          <title>App</title>
+          <title>Andrey's DAI Rate Getter</title>
         </head>
         <body>
           <div id="app">FOOOO</div>
