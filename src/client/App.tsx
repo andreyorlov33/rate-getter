@@ -86,9 +86,9 @@ const App: FC = () => {
 			timeAnchor = timeAnchor - 30 * 1000;
 			timeLabelChart.push(new Date(timeAnchor).toLocaleTimeString());
 		}
-    console.log('cDAI', cDaiChart)
-    console.log('aaveDAIChart', aaveDAIChart)
-		const updatedGraph = renderGraph(timeLabelChart, cDaiChart, aaveDAIChart);
+    
+    
+		const updatedGraph = renderGraph(timeLabelChart.reverse(), cDaiChart, aaveDAIChart);
 		setRenderedGraph(updatedGraph);
 	}, [aaveDAIChart, cDaiChart]);
 
